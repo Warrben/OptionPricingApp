@@ -1,11 +1,16 @@
 import numpy as np
 from scipy.stats import norm
 
-def calculate_option_prices(underlying_price, strike_price, risk_free_rate, volatility, time_to_expiry):
-    d1 = (np.log(underlying_price / strike_price) + (risk_free_rate + 0.5 * volatility**2) * time_to_expiry) / (volatility * np.sqrt(time_to_expiry))
-    d2 = d1 - volatility * np.sqrt(time_to_expiry)
+def calculate_call_price(input_1, input_2, input_3, input_4, input_5):
+  d1 = (np.log(input_1 / input_2) + (input_3 + 0.5 * input_4**2) * input_5) / (input_4 * np.sqrt(input_5))
+  d2 = d1 - input_4 * np.sqrt(input_5)
+  
+  call_price = input_1 * norm.cdf(d1) - input_2 * np.exp(-input_3 * input_5) * norm.cdf(d2)
+  return call_price
+
+def calculate_put_price(input_1, input_2, input_3, input_4, input_5):
+    d1 = (np.log(input_1 / input_2) + (input_3 + 0.5 * input_4**2) * input_5) / (input_4 * np.sqrt(input_5))
+    d2 = d1 - input_4 * np.sqrt(input_5)
     
-    call_price = underlying_price * norm.cdf(d1) - strike_price * np.exp(-risk_free_rate * time_to_expiry) * norm.cdf(d2)
-    put_price = strike_price * np.exp(-risk_free_rate * time_to_expiry) * norm.cdf(-d2) - underlying_price * norm.cdf(-d1)
-    
-    return call_price, put_price
+    put_price = input_2 * np.exp(-input_3 * input_5) * norm.cdf(-d2) - input_1 * norm.cdf(-d1)
+    return put_price
