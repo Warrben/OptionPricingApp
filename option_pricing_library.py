@@ -1,16 +1,16 @@
 import numpy as np
 from scipy.stats import norm
 
-def calculate_call_price(input_1, input_2, input_3, input_4, input_5):
-  d1 = (np.log(input_1 / input_2) + (input_3 + 0.5 * input_4**2) * input_5) / (input_4 * np.sqrt(input_5))
-  d2 = d1 - input_4 * np.sqrt(input_5)
+def calculate_call_price(share_price, exercise_PRICE, risk_free_rate, volatility, tenure):
+  d1 = (np.log(share_price / exercise_PRICE) + (risk_free_rate + 0.5 * volatility**2) * tenure) / (volatility * np.sqrt(tenure))
+  d2 = d1 - volatility * np.sqrt(tenure)
   
-  call_price = input_1 * norm.cdf(d1) - input_2 * np.exp(-input_3 * input_5) * norm.cdf(d2)
+  call_price = share_price * norm.cdf(d1) - exercise_PRICE * np.exp(-risk_free_rate * tenure) * norm.cdf(d2)
   return call_price
 
-def calculate_put_price(input_1, input_2, input_3, input_4, input_5):
-    d1 = (np.log(input_1 / input_2) + (input_3 + 0.5 * input_4**2) * input_5) / (input_4 * np.sqrt(input_5))
-    d2 = d1 - input_4 * np.sqrt(input_5)
+def calculate_put_price(share_price, exercise_PRICE, risk_free_rate, volatility, tenure):
+    d1 = (np.log(share_price / exercise_PRICE) + (risk_free_rate + 0.5 * volatility**2) * tenure) / (volatility * np.sqrt(tenure))
+    d2 = d1 - volatility * np.sqrt(tenure)
     
-    put_price = input_2 * np.exp(-input_3 * input_5) * norm.cdf(-d2) - input_1 * norm.cdf(-d1)
+    put_price = exercise_PRICE * np.exp(-risk_free_rate * tenure) * norm.cdf(-d2) - share_price * norm.cdf(-d1)
     return put_price

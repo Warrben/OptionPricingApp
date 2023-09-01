@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Option Pricing History</title>
+    <title>
+      Here are your results of option pricing as per the inputs provided by you
+    </title>
+  </head>
+  <body>
+    <h1>Option Pricing History</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Share Price</th>
+        <th>Exercise Price</th>
+        <th>RIsk Free Rate (%)</th>
+        <th>Volatility (%)</th>
+        <th>Tenure (years)</th>
+        <th>Call Price</th>
+        <th>Put Price</th>
+      </tr>
+      {% for data in option_data %}
+      <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ data.share_price }}</td>
+        <td>{{ data.exercise_PRICE }}</td>
+        <td>{{ data.risk_free_rate }}</td>
+        <td>{{ data.volatility }}</td>
+        <td>{{ data.tenure }}</td>
+        <td>{{ data.call_price }}</td>
+        <td>{{ data.put_price }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

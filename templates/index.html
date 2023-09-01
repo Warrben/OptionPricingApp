@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Option Pricing Calculator</title>
+    <title>This is a test app developed by Manish</title>
     <style>
       /* Add your custom styles here */
     </style>
@@ -13,24 +14,24 @@
       <h1>Option Pricing Calculator</h1>
       <form action="/calculate" method="post">
         <div class="form-group">
-          <label for="input_1">Input 1:</label>
-          <input type="number" step="any" name="input_1" required />
+          <label for="share_price">Share Price:</label>
+          <input type="number" step="any" name="share_price" required />
         </div>
         <div class="form-group">
-          <label for="input_2">Input 2:</label>
-          <input type="number" step="any" name="input_2" required />
+          <label for="exercise_PRICE">Exercise Price:</label>
+          <input type="number" step="any" name="exercise_PRICE" required />
         </div>
         <div class="form-group">
-          <label for="input_3">Input 3:</label>
-          <input type="number" step="any" name="input_3" required />
+          <label for="risk_free_rate">RIsk Free Rate (%):</label>
+          <input type="number" step="any" name="risk_free_rate" required />
         </div>
         <div class="form-group">
-          <label for="input_4">Input 4:</label>
-          <input type="number" step="any" name="input_4" required />
+          <label for="volatility">Volatility (%):</label>
+          <input type="number" step="any" name="volatility" required />
         </div>
         <div class="form-group">
-          <label for="input_5">Input 5:</label>
-          <input type="number" step="any" name="input_5" required />
+          <label for="tenure">Tenure (years):</label>
+          <input type="number" step="any" name="tenure" required />
         </div>
         <button type="submit">Calculate</button>
       </form>

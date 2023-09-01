@@ -9,25 +9,25 @@ db = SQLAlchemy(app)
 
 class OptionData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    input_1 = db.Column(db.Float, nullable=False)
-    input_2 = db.Column(db.Float, nullable=False)
-    input_3 = db.Column(db.Float, nullable=False)
-    input_4 = db.Column(db.Float, nullable=False)
-    input_5 = db.Column(db.Float, nullable=False)
+    share_price = db.Column(db.Float, nullable=False)
+    exercise_PRICE = db.Column(db.Float, nullable=False)
+    risk_free_rate = db.Column(db.Float, nullable=False)
+    volatility = db.Column(db.Float, nullable=False)
+    tenure = db.Column(db.Float, nullable=False)
     call_price = db.Column(db.Float)
     put_price = db.Column(db.Float)
 
-    def __init__(self, input_1, input_2, input_3, input_4, input_5, call_price, put_price):
-        self.input_1 = input_1
-        self.input_2 = input_2
-        self.input_3 = input_3
-        self.input_4 = input_4
-        self.input_5 = input_5
+    def __init__(self, share_price, exercise_PRICE, risk_free_rate, volatility, tenure, call_price, put_price):
+        self.share_price = share_price
+        self.exercise_PRICE = exercise_PRICE
+        self.risk_free_rate = risk_free_rate
+        self.volatility = volatility
+        self.tenure = tenure
         self.call_price = call_price
         self.put_price = put_price
 
     def __repr__(self):
-        return f"OptionData(id={self.id}, input_1={self.input_1}, input_2={self.input_2}, input_3={self.input_3}, input_4={self.input_4}, input_5={self.input_5}, call_price={self.call_price}, put_price={self.put_price})"
+        return f"OptionData(id={self.id}, share_price={self.share_price}, exercise_PRICE={self.exercise_PRICE}, risk_free_rate={self.risk_free_rate}, volatility={self.volatility}, tenure={self.tenure}, call_price={self.call_price}, put_price={self.put_price})"
 
 @app.route('/')
 def index():
@@ -35,23 +35,23 @@ def index():
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
-    input_1 = float(request.form.get('input_1'))
-    input_2 = float(request.form.get('input_2'))
-    input_3 = float(request.form.get('input_3'))
-    input_4 = float(request.form.get('input_4'))
-    input_5 = float(request.form.get('input_5'))
+    share_price = float(request.form.get('share_price'))
+    exercise_PRICE = float(request.form.get('exercise_PRICE'))
+    risk_free_rate = float(request.form.get('risk_free_rate'))
+    volatility = float(request.form.get('volatility'))
+    tenure = float(request.form.get('tenure'))
 
      # Perform option pricing calculations using your library
-    call_price = option_pricing_library.calculate_call_price(input_1, input_2, input_3, input_4, input_5)
-    put_price = option_pricing_library.calculate_put_price(input_1, input_2, input_3, input_4, input_5)
+    call_price = option_pricing_library.calculate_call_price(share_price, exercise_PRICE, risk_free_rate, volatility, tenure)
+    put_price = option_pricing_library.calculate_put_price(share_price, exercise_PRICE, risk_free_rate, volatility, tenure)
 
     # Save data to the database
     option_data = OptionData(
-        input_1=input_1,
-        input_2=input_2,
-        input_3=input_3,
-        input_4=input_4,
-        input_5=input_5,
+        share_price=share_price,
+        exercise_PRICE=exercise_PRICE,
+        risk_free_rate=risk_free_rate,
+        volatility=volatility,
+        tenure=tenure,
         call_price=call_price,
         put_price=put_price
     )
